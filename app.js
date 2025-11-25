@@ -87,30 +87,35 @@ console.log(game.difficulty)
 Exercise 4
 1. Select a starter Pokémon from the `pokemon` array. Remember, a starter Pokémon's `starter` 
 property is true.
-2. Add this Pokémon to the `game.party` array. Which array method will you use to add them?
-
+2. Add this Pokémon to the `game.party` array. Which array method will 
+you use to add them?
+In exercise 4, you are not supposed to pick the pokemon by yourself, 
+you are supposed to use the method .find() to find the pokemon whose 
+starter is true.
 
 Solve Exercise 4 here:
 */
 
-console.log(pokemon[24]) // Pikachu
-game.party.push(pokemon[24])
+const starterPokemon = pokemon.find(p => p.starter === true)
+game.party.push(starterPokemon)
 console.log(game.party)
 /*
+
 Exercise 5
 1. Choose three more Pokémon from the `pokemon` array and add them to your party.
 2. Consider different attributes like 'type' or 'HP' for your selection. Which array method
 will you use to add them?
 
-
 Solve Exercise 5 here:
 */
-game.party.push(pokemon[0]) // Bulbasaur
-game.party.push(pokemon[1]) // Ivysaur
-game.party.push(pokemon[2]) // Venusaur
-console.log(game.party)
 
+const pokemon2 = pokemon.find(p => p.number === 10) // Caterpie
+const pokemon3 = pokemon.find(p => p.number === 39) // Jigglypuff
+const pokemon4 = pokemon.find(p => p.number === 52) // Meowth
+game.party.push(pokemon2, pokemon3, pokemon4)
+console.log(game.party)
 /*
+
 Exercise 6
 1. Set the `completed` property to true for gyms with a difficulty below 3.
 2. Think about how you'd loop through the `gyms` array to check and update the `completed` 
@@ -141,12 +146,19 @@ Hint:
 More Hints: The existing starter Pokemon will be *replaced* in your party with the Pokemon it 
 evolved into. When working with an array of objects, the splice() array method is ideal for 
 replacing one element with another. 
-
+Exercise 7, you picked the evolvement by yourself. Let the computer do that.
 
 Solve Exercise 7 here:
 */
 
-game.party.splice(1, 1, pokemon[25]) // Replacing Pikachu with Raichu
+const starterIndex = game.party.findIndex(p => p.starter === true)
+// Find the index of the starter Pokemon in the party
+const evolvedForm = pokemon.find(p => p.number === starterPokemon.number + 1)
+// Find the evolved form of the starter Pokemon
+if (starterIndex !== -1 && evolvedForm) {
+// Replace the starter Pokemon with its evolved form
+  game.party.splice(starterIndex, 1, evolvedForm)
+} 
 console.log(game.party)
 
 /*
